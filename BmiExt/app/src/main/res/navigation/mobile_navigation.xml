@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_bmi">
+
+    <fragment
+        android:id="@+id/nav_bmi"
+        android:name="com.example.bmiext.ui.bmi.BmiFragment"
+        android:label="@string/menu_bmi"
+        tools:layout="@layout/fragment_bmi" />
+
+    <fragment
+        android:id="@+id/nav_bmr"
+        android:name="com.example.bmiext.ui.bmr.BmrFragment"
+        android:label="@string/menu_bmr"
+        tools:layout="@layout/fragment_bmr" />
+
+    <fragment
+        android:id="@+id/nav_recipes"
+        android:name="com.example.bmiext.ui.recipes.RecipesFragment"
+        android:label="@string/menu_recipes"
+        tools:layout="@layout/fragment_recipes" />
+</navigation>
