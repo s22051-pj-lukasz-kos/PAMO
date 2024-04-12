@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.bmiext.R;
+
 import java.text.DecimalFormat;
 
 public class BmiViewModel extends ViewModel {
@@ -20,14 +22,18 @@ public class BmiViewModel extends ViewModel {
         return mBmiResult;
     }
 
-    public void calculateBmi(double weight, int height) {
-        if (height <= 0 || weight <= 0) {
-            mBmiResult.setValue("Invalid input");
-        } else {
-            double usedHeight = height / 100.0;
-            double bmi = weight / Math.pow(usedHeight, 2);
-            mBmiResult.setValue(bmiFormat.format(bmi));
+    public void calculateBmi() {
+        Integer height = mHeight.getValue();
+        Double weight = mWeight.getValue();
+
+        if (weight == null || height == null || weight <= 0 || height <= 0) {
+            mBmiResult.setValue(String.valueOf(R.string.bmi_invalid_input));
+            return;
         }
+        double usedHeight = height / 100.0;
+        double bmi = weight / Math.pow(usedHeight, 2);
+        mBmiResult.setValue(bmiFormat.format(bmi));
+        Log.d("BmiViewModel", "bmiResult: " + bmi);
     }
 
     public LiveData<Double> getWeight() {

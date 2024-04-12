@@ -21,5 +21,12 @@
     <string name="bmr_result">BMR result: %s</string>
 
     <string name="bmi_invalid_input">Enter both weight and height</string>
+    <string name="weight_invalid_input">Wrong weight format</string>
+    <string name="height_invalid_input">Wrong height format</string>
+    <string name="age_invalid_input">Enter valid age</string>
     <string name="bmr_invalid_input">Calc BMI first and fill all fields here</string>
+    <string name="bmr_select_sex">Select sex</string>
+
+    <string name="no_recipes_available">There are no recipes available.</string>
+
 </resources>

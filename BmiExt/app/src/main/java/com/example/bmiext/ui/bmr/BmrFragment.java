@@ -1,6 +1,8 @@
 package com.example.bmiext.ui.bmr;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,74 +20,72 @@ import com.example.bmiext.ui.bmi.BmiViewModel;
 import java.text.DecimalFormat;
 
 public class BmrFragment extends Fragment {
-
-    private static final DecimalFormat bmrFormat = new DecimalFormat("#,##0.00");
     private FragmentBmrBinding binding;
     private BmrViewModel bmrViewModel;
-    private BmiViewModel bmiViewModel;
+    private static final DecimalFormat bmrFormat = new DecimalFormat("#,##0.00");
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        BmiViewModel bmiViewModel = new ViewModelProvider(requireActivity()).get(BmiViewModel.class);
         bmrViewModel =
-                new ViewModelProvider(this).get(BmrViewModel.class);
-
-        bmiViewModel = new ViewModelProvider(requireActivity()).get(BmiViewModel.class);
+                new ViewModelProvider(this, new BmrViewModelFactory(bmiViewModel)).get(BmrViewModel.class);
 
         binding = FragmentBmrBinding.inflate(inflater, container, false);
 
         binding.bmrRadioGroup.setOnCheckedChangeListener((group, checkedId) ->
-                calculateBmr()
+                updateBmr()
         );
 
+        binding.ageEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String ageText = s.toString().trim();
+                if (!ageText.isEmpty()) {
+                    try {
+                        updateBmr();
+                    } catch (NumberFormatException e) {
+                        binding.bmrTextView.setText(R.string.age_invalid_input);
+                        Log.e("BmrFragment", "Wrong age format: " + ageText, e);
+                    }
+                } else {
+                    bmrViewModel.setAge(0);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         bmrViewModel.getBmrResult().observe(getViewLifecycleOwner(), result -> {
-            String formattedResult = bmrFormat.format(result);
-            binding.bmrTextView.setText(getString(R.string.bmr_result, formattedResult));
+            String formattedBmr = bmrFormat.format(result);
+            binding.bmrTextView.setText(getString(R.string.bmr_result, formattedBmr));
         });
 
         return binding.getRoot();
     }
 
-    private void calculateBmr() {
-        double weight = 0.0;
-        int height = 0;
-        int age = 0;
-        String ageInput = binding.ageEditText.getText().toString();
-        if (!ageInput.isEmpty()) {
-            try {
-                age = Integer.parseInt(ageInput);
-            } catch (NumberFormatException e) {
-                binding.bmrTextView.setText(getString(R.string.bmr_invalid_input));
-                Log.e("BmrFragment", "Error parsing age", e);
-                return;
-            }
-        } else {
+    private void updateBmr() {
+        String ageString = binding.ageEditText.getText().toString();
+
+        try {
+            int age = ageString.isEmpty() ? 0 : Integer.parseInt(ageString);
+            boolean isMan = binding.manRadio.isChecked();
+            boolean isWoman = binding.womanRadio.isChecked();
+            bmrViewModel.setAge(age);
+            bmrViewModel.setIsMan(isMan);
+            bmrViewModel.setIsWoman(isWoman);
+            bmrViewModel.calculateBmr();
+        } catch (NumberFormatException e) {
             binding.bmrTextView.setText(getString(R.string.bmr_invalid_input));
-            Log.d("BmrFragment", "Age is empty");
-            return;
+            Log.e("BmrFragment", "Error parsing age", e);
         }
-
-
-        Double weightObj = bmiViewModel.getWeight().getValue();
-        if (weightObj != null) {
-            weight = weightObj;
-        }
-
-        Integer heightObj = bmiViewModel.getHeight().getValue();
-        if (heightObj != null) {
-            height = heightObj;
-        }
-
-        Log.d("BmrFragment", "Using Weight and Height: " + weight + ", " + height);
-
-        if (weight > 0 && height > 0 && age > 0) {
-            boolean isMale = binding.manRadio.isChecked();
-            Log.d("BmrFragment", "Gender is Male: " + isMale);
-            bmrViewModel.calculateBmr(weight, height, age, isMale);
-        } else {
-            binding.bmrTextView.setText(getString(R.string.bmr_invalid_input));
-        }
-
-
     }
 
     @Override

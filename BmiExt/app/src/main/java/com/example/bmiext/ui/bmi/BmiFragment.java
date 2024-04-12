@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,9 +15,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.bmiext.R;
 import com.example.bmiext.databinding.FragmentBmiBinding;
 
+import java.text.DecimalFormat;
+
 public class BmiFragment extends Fragment {
-    private FragmentBmiBinding binding;
     private BmiViewModel bmiViewModel;
+    private FragmentBmiBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -26,13 +27,9 @@ public class BmiFragment extends Fragment {
                 new ViewModelProvider(requireActivity()).get(BmiViewModel.class);
 
         binding = FragmentBmiBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final EditText weightEditText = binding.weightEditText;
-        final EditText heightEditText = binding.heightEditText;
 
 
-        weightEditText.addTextChangedListener(new TextWatcher() {
+        binding.weightEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -43,14 +40,13 @@ public class BmiFragment extends Fragment {
                 String weightText = s.toString().trim();
                 if (!weightText.isEmpty()) {
                     try {
-                        double weight = Double.parseDouble(weightText);
-                        bmiViewModel.setWeight(weight);
+                        updateBmi();
                     } catch (NumberFormatException e) {
+                        binding.bmiTextView.setText(R.string.weight_invalid_input);
                         Log.e("BmiFragment", "Wrong weight format: " + weightText, e);
                     }
                 } else {
                     bmiViewModel.setWeight(0.0);
-//                    updateBmi();
                 }
             }
 
@@ -59,7 +55,7 @@ public class BmiFragment extends Fragment {
             }
         });
 
-        heightEditText.addTextChangedListener(new TextWatcher() {
+        binding.heightEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -69,16 +65,14 @@ public class BmiFragment extends Fragment {
                 String heightText = s.toString().trim();
                 if (!heightText.isEmpty()) {
                     try {
-                        int height = Integer.parseInt(heightText);
-                        bmiViewModel.setHeight(height);
+                        updateBmi();
                     } catch (NumberFormatException e) {
+                        binding.bmiTextView.setText(R.string.height_invalid_input);
                         Log.e("BmiFragment", "Wrong height format: " + heightText, e);
                     }
                 } else {
                     bmiViewModel.setHeight(0);
                 }
-
-//                updateBmi();
             }
 
             @Override
@@ -87,19 +81,29 @@ public class BmiFragment extends Fragment {
             }
         });
 
-        bmiViewModel.getBmiResult().observe(getViewLifecycleOwner(), result -> binding.bmiTextView.setText(result));
+        bmiViewModel.getBmiResult().observe(getViewLifecycleOwner(), result -> {
+            if (result.equals(String.valueOf(R.string.bmi_invalid_input))) {
+                binding.bmiTextView.setText(getString(R.string.bmi_invalid_input));
+            } else {
+                binding.bmiTextView.setText(result);
+            }
+        });
 
-        return root;
+        return binding.getRoot();
     }
 
     private void updateBmi() {
+        String weightString = binding.weightEditText.getText().toString();
+        String heightString = binding.heightEditText.getText().toString();
+
         try {
-            double weight = Double.parseDouble(binding.weightEditText.getText().toString());
-            int height = Integer.parseInt(binding.heightEditText.getText().toString());
+            double weight = weightString.isEmpty() ? 0.0 : Double.parseDouble(weightString);
+            int height = heightString.isEmpty() ? 0 : Integer.parseInt(heightString);
+
             bmiViewModel.setWeight(weight);
             bmiViewModel.setHeight(height);
             Log.d("BmiFragment", "Weight and Height set: " + weight + ", " + height);
-            bmiViewModel.calculateBmi(weight, height);
+            bmiViewModel.calculateBmi();
         } catch (NumberFormatException e) {
             Log.e("BmiFragment", "Error parsing weight or height", e);
             binding.bmiTextView.setText(getString(R.string.bmi_invalid_input));
