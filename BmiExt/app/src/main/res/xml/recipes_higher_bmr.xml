@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<recipes>
+    <recipe>
+        <name>Chili’ish</name>
+        <imagePath>@drawable/chiliish_image</imagePath>
+        <ingredients>
+            <ingredient>2 lb (908g) lean ground beef</ingredient>
+            <ingredient>1/2 cup (119g) chopped onion</ingredient>
+            <ingredient>4 stalks celery (159g), chopped</ingredient>
+            <ingredient>1 green pepper, (162g) chopped</ingredient>
+            <ingredient>5 10 oz cans (1.56g) diced tomatoes with green chiles</ingredient>
+            <ingredient>15 oz (434g) can tomato sauce</ingredient>
+            <ingredient>1 Cup (237 mL) low sodium beef broth or water</ingredient>
+            <ingredient>2.5 oz (75g) of taco or chili seasoning</ingredient>
+            <ingredient>16 oz (455g) can chickpeas</ingredient>
+            <ingredient>16 oz (455g) can kidney beans</ingredient>
+            <ingredient>Salt and pepper to taste</ingredient>
+            <ingredient>1 Tbsp (15g) lemon juice</ingredient>
+            <ingredient>Slivers of green onion</ingredient>
+        </ingredients>
+        <instructions>
+            <instruction>Fully cook, then drain the ground beef.</instruction>
+            <instruction>Stir in onion and cook 5 minutes.</instruction>
+            <instruction>Add all remaining ingredients, except lemon juice and bring to a boil.</instruction>
+            <instruction>Reduce heat and simmer 1 hour.</instruction>
+            <instruction>Stir in lemon juice and serve, topped with green onion.</instruction>
+            <instruction>Discard the rosemary sprig before serving.</instruction>
+        </instructions>
+    </recipe>
+    <recipe>
+        <name>Juicy Chicken Bites</name>
+        <imagePath>@drawable/juicy_chicken_bites_image</imagePath>
+        <ingredients>
+            <ingredient>3 lb (1.36 kg) boneless skinless chicken breasts</ingredient>
+            <ingredient>2 Tbsp (34g) stone ground dijon mustard</ingredient>
+            <ingredient>6 Tbsp (90g) avocado oil mayo</ingredient>
+            <ingredient>1 Tbsp (15mL) pure maple syrup</ingredient>
+            <ingredient>1 Tbsp (15mL) honey</ingredient>
+        </ingredients>
+        <instructions>
+            <instruction>450°F (230°C) oven.</instruction>
+            <instruction>Line 2 large baking sheets with parchment paper.</instruction>
+            <instruction>In a large mixing bowl, whisk together mustard through honey.</instruction>
+            <instruction>Use scissors to cut the chicken breasts into bite sized pieces, and add them to the mixing bowl.</instruction>
+            <instruction>Use a spatula to fold the chicken into the mayo mixture until each piece is well coated.</instruction>
+            <instruction>Transfer chicken pieces to the prepared pans.</instruction>
+            <instruction>Bake 15-20 minutes, until browned on top.</instruction>
+        </instructions>
+    </recipe>
+</recipes>

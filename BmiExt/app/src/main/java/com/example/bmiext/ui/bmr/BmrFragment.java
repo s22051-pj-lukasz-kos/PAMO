@@ -26,56 +26,49 @@ public class BmrFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        BmiViewModel bmiViewModel = new ViewModelProvider(requireActivity()).get(BmiViewModel.class);
-        bmrViewModel =
-                new ViewModelProvider(this, new BmrViewModelFactory(bmiViewModel)).get(BmrViewModel.class);
-
         binding = FragmentBmrBinding.inflate(inflater, container, false);
 
-        binding.bmrRadioGroup.setOnCheckedChangeListener((group, checkedId) ->
-                updateBmr()
-        );
+        BmiViewModel bmiViewModel = new ViewModelProvider(requireActivity()).get(BmiViewModel.class);
+        bmrViewModel =
+                new ViewModelProvider(requireActivity(), new BmrViewModelFactory(bmiViewModel)).get(BmrViewModel.class);
 
-        binding.ageEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String ageText = s.toString().trim();
-                if (!ageText.isEmpty()) {
-                    try {
-                        updateBmr();
-                    } catch (NumberFormatException e) {
-                        binding.bmrTextView.setText(R.string.age_invalid_input);
-                        Log.e("BmrFragment", "Wrong age format: " + ageText, e);
-                    }
-                } else {
-                    bmrViewModel.setAge(0);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        setupUI();
 
         bmrViewModel.getBmrResult().observe(getViewLifecycleOwner(), result -> {
-            String formattedBmr = bmrFormat.format(result);
-            binding.bmrTextView.setText(getString(R.string.bmr_result, formattedBmr));
+            if (result != null) {
+                String formattedBmr = bmrFormat.format(result);
+                binding.bmrTextView.setText(getString(R.string.bmr_result, formattedBmr));
+            } else {
+                binding.bmrTextView.setText(getString(R.string.bmr_invalid_input));
+            }
+
         });
 
         return binding.getRoot();
     }
 
-    private void updateBmr() {
-        String ageString = binding.ageEditText.getText().toString();
+    private void setupUI() {
+        binding.bmrRadioGroup.setOnCheckedChangeListener((group, checkedId) -> updateBmr());
 
+        binding.ageEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.toString().trim().isEmpty()) {
+                    updateBmr();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+    }
+
+    private void updateBmr() {
         try {
-            int age = ageString.isEmpty() ? 0 : Integer.parseInt(ageString);
+            int age = Integer.parseInt(binding.ageEditText.getText().toString().trim());
             boolean isMan = binding.manRadio.isChecked();
             boolean isWoman = binding.womanRadio.isChecked();
             bmrViewModel.setAge(age);

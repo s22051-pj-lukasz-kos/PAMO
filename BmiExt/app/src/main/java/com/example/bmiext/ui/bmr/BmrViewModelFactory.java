@@ -13,7 +13,6 @@ public class BmrViewModelFactory implements ViewModelProvider.Factory {
         this.bmiViewModel = bmiViewModel;
     }
 
-    @NonNull
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
         if (modelClass.isAssignableFrom(BmrViewModel.class)) {

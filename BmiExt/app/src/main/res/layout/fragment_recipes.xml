@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.recipes.RecipesFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/emptyTextView"
+    <ExpandableListView
+        android:id="@+id/recipesExpandableListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/no_recipes_available"
-        android:visibility="gone"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:padding="16dp" />
+        android:layout_height="match_parent"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recipesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
-
-</FrameLayout>
+</RelativeLayout>

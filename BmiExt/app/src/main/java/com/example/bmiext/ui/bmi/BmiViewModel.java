@@ -37,10 +37,12 @@ public class BmiViewModel extends ViewModel {
     }
 
     public LiveData<Double> getWeight() {
+        Log.d("BmiViewModel", "Get weight: " + mWeight.getValue());
         return mWeight;
     }
 
     public LiveData<Integer> getHeight() {
+        Log.d("BmiViewModel", "Get height: " + mHeight.getValue());
         return mHeight;
     }
 

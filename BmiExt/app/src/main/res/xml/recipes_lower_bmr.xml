@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<recipes>
+    <recipe>
+        <name>Garlic Shrimp</name>
+        <imagePath>@drawable/garlic_shrimp_image</imagePath>
+        <ingredients>
+            <ingredient>4 garlic cloves (12g), grated or chopped finely</ingredient>
+            <ingredient>pinch of crushed red pepper</ingredient>
+            <ingredient>dash of smoked paprika</ingredient>
+            <ingredient>low sodium chicken broth, as needed</ingredient>
+            <ingredient>1 lb (453g) raw peeled shrimp, tails off</ingredient>
+            <ingredient>2 Tbsp (88g) lime juice - fresh or jarred</ingredient>
+            <ingredient>Salt and pepper to taste</ingredient>
+            <ingredient>fresh chopped cilantro</ingredient>
+            <ingredient>more crushed red pepper, optional</ingredient>
+        </ingredients>
+        <instructions>
+            <instruction>Add garlic, red pepper and smoked paprika to a skillet.</instruction>
+            <instruction>Add just enough chicken broth to keep garlic from burning, and saute over med heat until garlic just starts to brown.</instruction>
+            <instruction>Increase heat to medium-high and add shrimp; cook until color changes to pink - 2 or 3 minutes.</instruction>
+            <instruction>Add in lime juice and salt and pepper.</instruction>
+            <instruction>Remove from heat and toss in fresh cilantro.</instruction>
+            <instruction>Sprinkle with more crushed red pepper if you like it extra spicy!</instruction>
+        </instructions>
+    </recipe>
+    <recipe>
+        <name>Celery Soup</name>
+        <imagePath>@drawable/celery_soup_image</imagePath>
+        <ingredients>
+            <ingredient>2 1/2 lb celery (1.12 KG), cut into 2” chunks</ingredient>
+            <ingredient>1 Cup 2% milk (240 mL)</ingredient>
+            <ingredient>3/4 Cup (180 mL) half and half</ingredient>
+            <ingredient>8-10 whole thyme sprigs, plus chopped thyme leaves to garnish</ingredient>
+            <ingredient>1 tsp salt</ingredient>
+            <ingredient>big pinch black pepper</ingredient>
+            <ingredient>1/4 Cup (34g) crumbled blue cheese</ingredient>
+        </ingredients>
+        <instructions>
+            <instruction>Tie thyme sprigs together with kitchen twine (makes it easier to remove them later).</instruction>
+            <instruction>Add celery through thyme sprigs to a large stockpot.</instruction>
+            <instruction>Bring mixture to a simmer; cover and cook over medium heat, stirring occasionally, until celery is very soft.</instruction>
+            <instruction>Reduce heat as needed so that you keep a very gentle simmer.</instruction>
+            <instruction>Remove from the heat, discard the thyme sprigs and stir in salt and pepper.</instruction>
+            <instruction>Add in blue cheese.</instruction>
+            <instruction>Puree with a stick blender.</instruction>
+            <instruction>Garnish with fresh chopped thyme.</instruction>
+        </instructions>
+    </recipe>
+</recipes>

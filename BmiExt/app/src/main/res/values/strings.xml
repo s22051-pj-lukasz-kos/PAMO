@@ -28,5 +28,9 @@
     <string name="bmr_select_sex">Select sex</string>
 
     <string name="no_recipes_available">There are no recipes available.</string>
+    <string name="recipe_ingredients_text">Ingredients</string>
+    <string name="recipe_instructions_text">Instructions</string>
+
+    <string name="recipe_no_bmr">Please enter your BMR details first.</string>
 
 </resources>

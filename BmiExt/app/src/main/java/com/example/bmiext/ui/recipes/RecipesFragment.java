@@ -1,56 +1,53 @@
 package com.example.bmiext.ui.recipes;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ExpandableListView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bmiext.R;
-import com.example.bmiext.databinding.FragmentBmrBinding;
 import com.example.bmiext.ui.bmi.BmiViewModel;
 import com.example.bmiext.ui.bmr.BmrViewModel;
 import com.example.bmiext.ui.bmr.BmrViewModelFactory;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RecipesFragment extends Fragment {
-    private FragmentBmrBinding binding;
-    private BmrViewModel bmrViewModel;
-    private BmiViewModel bmiViewModel;
+    private ExpandableListView expandableListView;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        bmiViewModel = new ViewModelProvider(requireActivity()).get(BmiViewModel.class);
-        BmrViewModelFactory bmrFactory = new BmrViewModelFactory(bmiViewModel);
-        bmrViewModel = new ViewModelProvider(this, bmrFactory).get(BmrViewModel.class);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_recipes, container, false);
+        expandableListView = view.findViewById(R.id.recipesExpandableListView);
 
-        binding = FragmentBmrBinding.inflate(inflater, container, false);
-        RecipesViewModelFactory factory = new RecipesViewModelFactory(bmiViewModel, bmrViewModel);
+        BmiViewModel bmiViewModel = new ViewModelProvider(requireActivity()).get(BmiViewModel.class);
+        BmrViewModelFactory factory = new BmrViewModelFactory(bmiViewModel);
+        BmrViewModel bmrViewModel = new ViewModelProvider(requireActivity(), factory).get(BmrViewModel.class);
+        Log.d("RecipesFragment", "onCreateView works");
+        Log.d("RecipesFragment", "getBmrResult: " + bmrViewModel.getBmrResult().getValue());
+        bmrViewModel.getBmrResult().observe(getViewLifecycleOwner(), bmr -> {
+            Log.d("RecipesFragment", "bmrViewModel.getBmrResult():" + bmr);
+            if (bmr == null || bmr == 0.0) {
+                showInitializationNeededMessage();
+            } else {
+                int recipeResource = bmr < 1800 ? R.xml.recipes_lower_bmr : R.xml.recipes_higher_bmr;
+                List<Recipe> recipes = RecipeParser.parseRecipes(getContext(), recipeResource);
+                Log.d("RecipesFragment", "recipes: " + recipes);
+                RecipeExpandableListAdapter adapter = new RecipeExpandableListAdapter(getContext(), recipes);
+                expandableListView.setAdapter(adapter);
+            }
+        });
 
-        RecipesViewModel recipeViewModel = new ViewModelProvider(this, factory).get(RecipesViewModel.class);
+        return view;
+    }
 
-        View root = inflater.inflate(R.layout.fragment_recipes, container, false);
-        RecyclerView recipesRecyclerView = root.findViewById(R.id.recipesRecyclerView);
-        TextView emptyTextView = root.findViewById(R.id.emptyTextView);
-
-        recipesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        RecipeAdapter adapter = new RecipeAdapter(new ArrayList<>());  // Initially empty or populated based on your logic
-        recipesRecyclerView.setAdapter(adapter);
-
-        boolean recipesAvailable = adapter.getItemCount() > 0;
-        if (recipesAvailable) {
-            emptyTextView.setVisibility(View.GONE);
-            recipesRecyclerView.setVisibility(View.VISIBLE);
-        } else {
-            emptyTextView.setVisibility(View.VISIBLE);
-            recipesRecyclerView.setVisibility(View.GONE);
-        }
-        return root;
+    private void showInitializationNeededMessage() {
+        Toast.makeText(getContext(), R.string.recipe_no_bmr, Toast.LENGTH_LONG).show();
     }
 }
