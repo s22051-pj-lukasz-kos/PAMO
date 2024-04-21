@@ -32,5 +32,6 @@
     <string name="recipe_instructions_text">Instructions</string>
 
     <string name="recipe_no_bmr">Please enter your BMR details first.</string>
+    <string name="recipe_image_content_description">Photo of a meal</string>
 
 </resources>

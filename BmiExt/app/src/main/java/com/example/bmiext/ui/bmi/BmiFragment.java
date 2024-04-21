@@ -15,8 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.bmiext.R;
 import com.example.bmiext.databinding.FragmentBmiBinding;
 
-import java.text.DecimalFormat;
-
 public class BmiFragment extends Fragment {
     private BmiViewModel bmiViewModel;
     private FragmentBmiBinding binding;

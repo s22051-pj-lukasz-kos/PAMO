@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.style.BulletSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +17,8 @@ import com.example.bmiext.R;
 import java.util.List;
 
 public class RecipeExpandableListAdapter extends BaseExpandableListAdapter {
-    private Context context;
-    private List<Recipe> recipes;
+    private final Context context;
+    private final List<Recipe> recipes;
 
     public RecipeExpandableListAdapter(Context context, List<Recipe> recipes) {
         this.context = context;

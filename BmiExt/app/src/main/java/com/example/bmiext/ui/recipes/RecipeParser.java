@@ -2,6 +2,7 @@ package com.example.bmiext.ui.recipes;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
+import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -64,7 +65,7 @@ public class RecipeParser {
                 eventType = parser.next();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("RecipeParser", "XML Parser error", e);
         }
 
         return recipes;

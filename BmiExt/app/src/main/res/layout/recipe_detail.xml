@@ -16,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_recipe_placeholder" />
+        android:src="@drawable/ic_recipe_placeholder"
+        android:contentDescription="@string/recipe_image_content_description"/>
 
     <TextView
         android:id="@+id/ingredients_title"
