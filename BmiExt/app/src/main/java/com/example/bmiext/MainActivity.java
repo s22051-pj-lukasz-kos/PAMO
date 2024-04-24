@@ -1,7 +1,6 @@
 package com.example.bmiext;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 
 import com.google.android.material.snackbar.Snackbar;

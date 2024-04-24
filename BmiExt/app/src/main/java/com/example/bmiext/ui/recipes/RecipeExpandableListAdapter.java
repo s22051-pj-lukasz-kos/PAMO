@@ -66,7 +66,7 @@ public class RecipeExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.group_recipe, parent, false);
         }
-        TextView title = (TextView) convertView.findViewById(R.id.recipeTitle);
+        TextView title = convertView.findViewById(R.id.recipeTitle);
         title.setText(getGroup(groupPosition).getName());
         return convertView;
     }
