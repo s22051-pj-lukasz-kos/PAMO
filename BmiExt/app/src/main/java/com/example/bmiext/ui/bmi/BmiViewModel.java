@@ -1,7 +1,5 @@
 package com.example.bmiext.ui.bmi;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -33,26 +31,26 @@ public class BmiViewModel extends ViewModel {
         double usedHeight = height / 100.0;
         double bmi = weight / Math.pow(usedHeight, 2);
         mBmiResult.setValue(bmiFormat.format(bmi));
-        Log.d("BmiViewModel", "bmiResult: " + bmi);
+//        Log.d("BmiViewModel", "bmiResult: " + bmi);
     }
 
     public LiveData<Double> getWeight() {
-        Log.d("BmiViewModel", "Get weight: " + mWeight.getValue());
+//        Log.d("BmiViewModel", "Get weight: " + mWeight.getValue());
         return mWeight;
     }
 
     public LiveData<Integer> getHeight() {
-        Log.d("BmiViewModel", "Get height: " + mHeight.getValue());
+//        Log.d("BmiViewModel", "Get height: " + mHeight.getValue());
         return mHeight;
     }
 
     public void setWeight(double weight) {
         mWeight.setValue(weight);
-        Log.d("BmiViewModel", "Weight set: " + weight);
+//        Log.d("BmiViewModel", "Weight set: " + weight);
     }
 
     public void setHeight(int height) {
         mHeight.setValue(height);
-        Log.d("BmiViewModel", "Height set: " + height);
+//        Log.d("BmiViewModel", "Height set: " + height);
     }
 }
