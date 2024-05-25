@@ -16,5 +16,9 @@
             android:id="@+id/nav_recipes"
             android:icon="@drawable/skillet_24"
             android:title="@string/menu_recipes" />
+        <item
+            android:id="@+id/nav_shopping_list"
+            android:icon="@drawable/grocery_24dp"
+            android:title="@string/menu_list" />
     </group>
 </menu>

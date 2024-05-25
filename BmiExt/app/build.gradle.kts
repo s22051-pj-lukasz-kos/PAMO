@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
 android {
@@ -28,6 +29,10 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -39,6 +44,8 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.recyclerview)
+    implementation(libs.core.ktx)
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
     testImplementation(libs.core.testing)
