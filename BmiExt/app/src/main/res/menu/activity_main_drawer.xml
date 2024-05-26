@@ -20,5 +20,9 @@
             android:id="@+id/nav_shopping_list"
             android:icon="@drawable/grocery_24dp"
             android:title="@string/menu_list" />
+        <item
+            android:id="@+id/nav_bmi_chart"
+            android:icon="@drawable/outline_multiline_chart_24"
+            android:title="@string/menu_bmi_chart" />
     </group>
 </menu>

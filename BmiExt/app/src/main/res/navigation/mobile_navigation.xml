@@ -28,4 +28,10 @@
         android:name="com.example.bmiext.ui.shoppingList.ShoppingListFragment"
         android:label="@string/menu_list"
         tools:layout="@layout/fragment_shopping_list" />
+
+    <fragment
+        android:id="@+id/nav_bmi_chart"
+        android:name="com.example.bmiext.ui.chart.BmiChartFragment"
+        android:label="@string/menu_bmi_chart"
+        tools:layout="@layout/fragment_bmi_chart" />
 </navigation>

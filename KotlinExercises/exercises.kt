@@ -2,18 +2,18 @@ import kotlin.math.PI
 
 /**
  * For displaying the output of exercises in terminal
- * 
+ *
  * To compile the program, run the following command in the terminal:
- * 
+ *
  * kotlinc exercises.kt -include-runtime -d exercises.jar
  * java -jar exercises.jar
- * 
+ *
  * You need to install Kotlin and Java 17 to run this program
  * On Ubuntu, you can install Kotlin using Homebrew:
  * brew install kotlin
- * 
+ *
  * You could also install Java using Homebrew.
- * 
+ *
  * @autor:    Łukasz Kos, s22051
  */
 fun main() {
@@ -32,7 +32,7 @@ fun main() {
 /**
  * Exercise 1
  * Complete the code to make the program print "Mary is 20 years old" to standard output:
- * 
+ *
  * fun main() {
  *  val name = "Mary"
  *  val age = 20
@@ -69,14 +69,14 @@ fun zad2() {
 /**
  * Exercise 3
  * You have a list of “green” numbers and a list of “red” numbers. Complete the code to print how many numbers there are in total.
- * 
+ *
  * fun main() {
  *  val greenNumbers = listOf(1, 4, 23)
  *  val redNumbers = listOf(17, 2)
  *  // Write your code here
  * }
  */
- fun zad3() {
+fun zad3() {
     val greenNumbers = listOf(1, 4, 23)
     val redNumbers = listOf(17, 2)
     val greenNumbersCount = greenNumbers.count();
@@ -90,10 +90,10 @@ fun zad2() {
 
 /**
  * Exercise 4
- * You have a set of protocols supported by your server. 
- * A user requests to use a particular protocol. 
+ * You have a set of protocols supported by your server.
+ * A user requests to use a particular protocol.
  * Complete the program to check whether the requested protocol is supported or not (isSupported must be a Boolean value).
- * 
+ *
  * fun main() {
  *  val SUPPORTED = setOf("HTTP", "HTTPS", "FTP")
  *  val requested = "smtp"
@@ -115,7 +115,7 @@ fun zad4() {
 /**
  * Exercise 5
  * Define a map that relates integer numbers from 1 to 3 to their corresponding spelling. Use this map to spell the given number.
- * 
+ *
  * fun main() {
  *  val number2word = // Write your code here
  *  val n = 2
@@ -144,7 +144,7 @@ fun zad5() {
 fun zad6() {
     val button = "A"
 
-    fun controller(button: String): String { 
+    fun controller(button: String): String {
         return when (button) {
             "A" -> "Yes"
             "B" -> "No"
@@ -163,7 +163,7 @@ fun zad6() {
  * You have a program that counts pizza slices until there’s a whole pizza with 8 slices. Refactor this program in two ways:
  * - Use a while loop.
  * - Use a do-while loop.
- * 
+ *
  * fun main() {
  *  var pizzaSlices = 0
  *  // Start refactoring here
@@ -212,11 +212,10 @@ fun zad7() {
 }
 
 
-
 /**
  * Exercise 8
- * Write a program that simulates the Fizz buzz game. Your task is to print numbers from 1 to 100 incrementally, 
- * replacing any number divisible by three with the word "fizz", and any number divisible by five with the word "buzz". 
+ * Write a program that simulates the Fizz buzz game. Your task is to print numbers from 1 to 100 incrementally,
+ * replacing any number divisible by three with the word "fizz", and any number divisible by five with the word "buzz".
  * Any number divisible by both 3 and 5 must be replaced with the word "fizzbuzz".
  */
 fun zad8() {
@@ -257,6 +256,7 @@ fun zad10() {
     fun circleArea(radius: Int): Double {
         return PI * radius * radius
     }
+
     var output = circleArea(circleRadius)
     println("\nExercise 10")
     println("Circle area: ${output}")
